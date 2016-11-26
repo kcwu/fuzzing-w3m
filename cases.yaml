@@ -1,0 +1,88 @@
+- case: tats-w3m-7
+  cve: CVE-2016-9430
+- case:
+    - tats-w3m-8.1
+    - tats-w3m-8.2
+  cve: CVE-2016-9422
+- case: tats-w3m-9
+  cve: CVE-2016-9423
+- case: tats-w3m-10
+  cve: CVE-2016-9431
+- case:
+    - tats-w3m-12.1
+    - tats-w3m-12.2
+  cve: CVE-2016-9424
+- case:
+    - tats-w3m-13.1
+    - tats-w3m-13.2
+    - tats-w3m-13.3
+  cve: CVE-2016-9432
+- case: tats-w3m-14
+  cve: CVE-2016-9433
+- case: tats-w3m-15
+  cve: CVE-2016-9434
+- case:
+    - tats-w3m-16.1
+    - tats-w3m-16.2
+    - tats-w3m-16.3
+  cve:
+    - CVE-2016-9435
+    - CVE-2016-9436
+- case: tats-w3m-17
+  cve: CVE-2016-9437
+- case: tats-w3m-18
+  cve: CVE-2016-9438
+- case:
+    - tats-w3m-20.1
+    - tats-w3m-20.2
+    - tats-w3m-20.3
+    - tats-w3m-20.4
+  cve: CVE-2016-9439
+- case: tats-w3m-21
+  cve: CVE-2016-9425
+- case: tats-w3m-22
+  cve: CVE-2016-9440
+- case: tats-w3m-23
+  cve: CVE-2016-9633
+- case: tats-w3m-24
+  cve: CVE-2016-9441
+- case: tats-w3m-25
+  cve: CVE-2016-9426
+- case: tats-w3m-26
+  cve: CVE-2016-9428
+- case:
+    - tats-w3m-28.1
+    - tats-w3m-28.2
+  cve: CVE-2016-9443
+- case: tats-w3m-29
+  cve: CVE-2016-9429
+- case:
+    - tats-w3m-32.1
+    - tats-w3m-32.2
+  cve: CVE-2016-9622
+- case: tats-w3m-33
+  cve: CVE-2016-9623
+- case: tats-w3m-35
+  cve: CVE-2016-9624
+- case: tats-w3m-36
+  cve: CVE-2016-9625
+- case: tats-w3m-37
+  cve: CVE-2016-9626
+- case: tats-w3m-38
+  cve: CVE-2016-9627
+- case: tats-w3m-39
+  cve: CVE-2016-9628
+- case: tats-w3m-40
+  cve: CVE-2016-9629
+- case:
+    - tats-w3m-41.1
+    - tats-w3m-41.2
+  cve: CVE-2016-9630
+- case: tats-w3m-42
+  cve: CVE-2016-9631
+- case: tats-w3m-43
+  cve: CVE-2016-9632
+- case: tats-w3m-44
+- case:
+    - tats-w3m-51.1
+    - tats-w3m-51.2
