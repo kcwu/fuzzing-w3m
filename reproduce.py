@@ -189,7 +189,6 @@ def case_sort_key(case):
 def linkify(text):
     if isinstance(text, list):
         return '<br>'.join(map(linkify, text))
-    print repr(text)
     if re.match('^CVE-\d+-\d+$', text):
         return '<a href=http://cve.mitre.org/cgi-bin/cvename.cgi?name=%s>%s</a>' % (text, text)
     if re.match('^http', text):
