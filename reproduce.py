@@ -316,12 +316,12 @@ def main():
     entries = yaml.safe_load(file('cases.yaml'))
     groups = []
     for i, entry in enumerate(entries):
-        found = False
+        found = []
         entry['bug'] = aslist(entry.get('bug'))
         entry['case'] = aslist(entry.get('case'))
         for case in entry['case']:
             if case in cases:
-                found = True
+                found.append(case)
                 known_cases[case] = len(groups)
             bug = None
             m = re.match(r'^tats-w3m-(\d+)', case)
@@ -333,6 +333,7 @@ def main():
             if bug and bug not in entry['bug']:
                 entry['bug'].append(bug)
         if found:
+            entry['case'] = found
             groups.append(entry)
     for case in cases:
         if case in known_cases:
