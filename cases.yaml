@@ -86,3 +86,22 @@
 - case:
     - tats-w3m-51.1
     - tats-w3m-51.2
+- case: tats-w3m-57
+- case: tats-w3m-58
+- case: tats-w3m-59
+- case: tats-w3m-60
+- case: tats-w3m-61
+- case: tats-w3m-62
+- case: tats-w3m-63
+- case: tats-w3m-64
+- case: tats-w3m-65
+- case: tats-w3m-66
+- case: tats-w3m-67
+- case:
+    - tats-w3m-68.1
+    - tats-w3m-68.2
+    - tats-w3m-68.3
+    - tats-w3m-68.4
+- case: tats-w3m-69
+- case: tats-w3m-70
+- case: tats-w3m-71
