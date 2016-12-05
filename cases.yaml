@@ -50,6 +50,8 @@
   cve: CVE-2016-9426
 - case: tats-w3m-26
   cve: CVE-2016-9428
+- TODO: tats-w3m-27
+  cve: CVE-2016-9442
 - case:
     - tats-w3m-28.1
     - tats-w3m-28.2
