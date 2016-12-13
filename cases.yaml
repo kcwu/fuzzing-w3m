@@ -107,7 +107,9 @@
     - tats-w3m-68.3
     - tats-w3m-68.4
 - case: tats-w3m-69
-- case: tats-w3m-70
+- case:
+    - tats-w3m-70
+    - tats-w3m-70.2
 - case: tats-w3m-71
 - case: tats-w3m-72
 - case: tats-w3m-73
