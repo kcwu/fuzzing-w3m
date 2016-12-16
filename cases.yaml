@@ -124,4 +124,6 @@
 - case: tats-w3m-82
 - case: tats-w3m-83
 - case: tats-w3m-84
-- case: tats-w3m-85
+- case:
+    - tats-w3m-85
+    - tats-w3m-85.2
