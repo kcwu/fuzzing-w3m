@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # Copyright 2016 Google Inc.
 #
@@ -83,7 +83,7 @@ def cache(func):
 
 @cache
 def file_md5(fn):
-    return hashlib.md5(file(fn, 'rb').read()).hexdigest()
+    return hashlib.md5(open(fn, 'rb').read()).hexdigest()
 
 def setlimits(m):
     if m > 10000:
@@ -177,6 +177,7 @@ def run(target, detector, fn):
         result.update(status='timeout')
         return result
 
+    stderr = stderr.decode('utf8')
     stderr = stderr.replace(os.path.realpath('.'), '')
     result.update(status='return', stderr=stderr, returncode=p.returncode)
     return result
@@ -210,7 +211,7 @@ def reproduce(target, detector, case_path):
     cache_fn = get_cache_fn(target, detector, case_path)
     result = None
     if not args.nocache and os.path.exists(cache_fn):
-        cache = yaml.safe_load(file(cache_fn))
+        cache = yaml.safe_load(open(cache_fn))
         if cache.get('exe'):
             if not os.path.exists(cache['exe']):
                 # foreign result
@@ -220,7 +221,7 @@ def reproduce(target, detector, case_path):
     if not result:
         result = run(target, detector, case_path)
         assert result
-        with file(cache_fn, 'w') as f:
+        with open(cache_fn, 'w') as f:
             yaml.dump(result, f)
 
     stderr = result.get('stderr', '')
@@ -260,43 +261,43 @@ def reproduce(target, detector, case_path):
             status = 'OOM'
         if args.bug:
             assert os.path.exists(result['filename'])
-            print textwrap.dedent('''
+            print(textwrap.dedent('''
             input (`xxd {}`)
             ```
             {}
             ```
             ''').format(
                     result['filename'],
-                    subprocess.check_output(['xxd', result['filename']]).strip()).lstrip()
+                    subprocess.check_output(['xxd', result['filename']], encoding='utf8').strip()).lstrip())
 
             cmdline = subprocess.list2cmdline(result['cmd'])
             for k, v in result['env'].items():
                 cmdline = '%s=%s ' % (k, v) + cmdline
 
-            print textwrap.dedent('''
+            print(textwrap.dedent('''
             how to reproduce:
             ```
             {}
             ```
-            ''').format(cmdline).lstrip()
+            ''').format(cmdline).lstrip())
 
             if stderr:
-                print textwrap.dedent('''
+                print(textwrap.dedent('''
                 stderr:
                 ```
                 {}
                 ```
-                ''').format(stderr.strip()).lstrip()
+                ''').format(stderr.strip()).lstrip())
 
             if '+m' in detector:
-                print 'This is detected with help of dummy libgc wrapper. See http://github.com/kcwu/fuzzing-w3m/notgc for detail.'
+                print('This is detected with help of dummy libgc wrapper. See http://github.com/kcwu/fuzzing-w3m/notgc for detail.')
             if '+d' in detector:
-                print 'This is detected with help of libdislocator, an abusive allocator. See https://github.com/mcarpenter/afl/tree/master/libdislocator for detail.'
-            print 'More detail to reproduce please see http://github.com/kcwu/fuzzing-w3m'
+                print('This is detected with help of libdislocator, an abusive allocator. See https://github.com/mcarpenter/afl/tree/master/libdislocator for detail.')
+            print('More detail to reproduce please see http://github.com/kcwu/fuzzing-w3m')
 
             if 'valgrind' not in cmdline:
-                print
-                print 'For your convenience,'
+                print()
+                print('For your convenience,')
                 gdbcmd = ['gdb']
                 gdbenv = []
                 for k, v in result['env'].items():
@@ -306,11 +307,11 @@ def reproduce(target, detector, case_path):
                         gdbenv.append('%s=%s' % (k, v))
                 gdbcmd += ['--args'] + result['cmd']
                 gdbline = ' '.join(gdbenv + [subprocess.list2cmdline(gdbcmd)])
-                print 'gdbline:'
-                print gdbline
+                print('gdbline:')
+                print(gdbline)
 
         else:
-            print stderr.rstrip()
+            print(stderr.rstrip())
 
     print
 
@@ -341,7 +342,8 @@ def main():
         targets = [(args.target, '')]
 
     known_cases = {}
-    entries = yaml.safe_load(file('cases.yaml'))
+    with open('cases.yaml') as f:
+      entries = yaml.safe_load(f)
     groups = []
     for i, entry in enumerate(entries):
         found = []
@@ -417,7 +419,7 @@ def main():
                             bg = '#ffff80'
                         elif status == 'n/a':
                             bg = 'white'
-                        elif status < 0:
+                        elif isinstance(status, int) and status < 0:
                             bg = '#ff8080'
                         else:
                             bg = '#ff80ff'
