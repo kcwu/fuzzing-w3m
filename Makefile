@@ -1,4 +1,4 @@
-CC = clang-3.8
+CC = clang
 CFLAGS += -O0 -g
 
 CONFIGURE_ARGS=--enable-image=no
@@ -14,7 +14,7 @@ init:
 
 fetch-depend:
 	# for libdislocator
-	git clone https://github.com/mcarpenter/afl.git
+	git clone https://github.com/AFLplusplus/AFLplusplus.git
 	# tats
 	git clone https://github.com/tats/w3m.git targets/w3m-tats
 	git clone https://github.com/tats/w3m.git -b 'v0.5.3+git20160718' targets/w3m-tats.20160718
@@ -24,7 +24,7 @@ fetch-depend:
 	cd targets/w3m-0.5.3 && patch -p1 < ../../files/0002-fix-build.patch
 
 build-depend:
-	cd afl/libdislocator && make
+	cd AFLplusplus/utils/libdislocator && make
 	cd notgc && make
 
 do-build:

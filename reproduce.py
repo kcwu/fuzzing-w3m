@@ -110,7 +110,7 @@ def run(target, detector, fn):
             continue
         if detector.endswith('+d'):
             detector = detector[:-2]
-            env['LD_PRELOAD'] = './afl/libdislocator/libdislocator.so'
+            env['LD_PRELOAD'] = './AFLplusplus/utils/libdislocator/libdislocator.so'
             mem_limit = 1e100
             continue
         break
@@ -268,7 +268,7 @@ def reproduce(target, detector, case_path):
             ```
             ''').format(
                     result['filename'],
-                    subprocess.check_output(['xxd', result['filename']], encoding='utf8').strip()).lstrip())
+                    subprocess.check_output(['xxd', result['filename']]).strip()).lstrip())
 
             cmdline = subprocess.list2cmdline(result['cmd'])
             for k, v in result['env'].items():
@@ -292,7 +292,7 @@ def reproduce(target, detector, case_path):
             if '+m' in detector:
                 print('This is detected with help of dummy libgc wrapper. See http://github.com/kcwu/fuzzing-w3m/notgc for detail.')
             if '+d' in detector:
-                print('This is detected with help of libdislocator, an abusive allocator. See https://github.com/mcarpenter/afl/tree/master/libdislocator for detail.')
+              print('This is detected with help of libdislocator, an abusive allocator. See https://github.com/AFLplusplus/AFLplusplus/tree/stable/utils/libdislocator for detail.')
             print('More detail to reproduce please see http://github.com/kcwu/fuzzing-w3m')
 
             if 'valgrind' not in cmdline:
