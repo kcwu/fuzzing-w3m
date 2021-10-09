@@ -223,10 +223,38 @@ def reproduce(target, detector, case_path):
         with file(cache_fn, 'w') as f:
             yaml.dump(result, f)
 
-    status = result['returncode'] if result['status'] == 'return' else result['status']
+    stderr = result.get('stderr', '')
+    status = result['status']
+    if status == 'return':
+        prefix = ''
+        if 'heap-buffer-overflow' in stderr:
+            prefix = 'heap '
+        elif 'stack-buffer-overflow' in stderr:
+            prefix = 'stack '
+        elif 'global-buffer-overflow' in stderr:
+            prefix = 'glboal '
+        elif 'use-after-free' in stderr:
+            prefix = 'UAF '
+
+        m = re.search(r'Process terminating with default action of signal (\d+)', stderr)
+        if m:
+            status = -int(m.group(1))
+        elif 'AddressSanitizer: SEGV' in stderr:
+            status = -signal.SIGSEGV
+        elif 'stack-overflow' in stderr:
+            status = 'SO'
+        elif 'Invalid write of size' in stderr or 'WRITE of size' in stderr:
+            status = prefix + 'write'
+        elif 'Invalid read of size' in stderr or 'READ of size' in stderr:
+            status = prefix + 'read'
+        elif 'Conditional jump or move depends on uninitialised value' in stderr or 'use-of-uninitialized-value' in stderr:
+            status = 'uninit'
+        elif 'variable length array bound evaluates to non-positive value 0' in stderr:
+            status = '[0]'
+    if status == 'return':
+        status = result['returncode']
     logger.info('[%s] %s %s: %s', case_path, target, detector, status)
     if status != 0:
-        stderr = result.get('stderr', '')
         if ("*** [AFL] mprotect() failed when allocating memory ***" in stderr or
                 "Out of memory: " in stderr):
             status = 'OOM'
