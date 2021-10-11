@@ -290,10 +290,10 @@ def reproduce(target, detector, case_path):
                 ''').format(stderr.strip()).lstrip())
 
             if '+m' in detector:
-                print('This is detected with help of dummy libgc wrapper. See http://github.com/kcwu/fuzzing-w3m/notgc for detail.')
+                print('This is detected with help of dummy libgc wrapper. See https://github.com/kcwu/fuzzing-w3m/tree/master/notgc for detail.')
             if '+d' in detector:
               print('This is detected with help of libdislocator, an abusive allocator. See https://github.com/AFLplusplus/AFLplusplus/tree/stable/utils/libdislocator for detail.')
-            print('More detail to reproduce please see http://github.com/kcwu/fuzzing-w3m')
+            print('More detail to reproduce please see https://github.com/kcwu/fuzzing-w3m')
 
             if 'valgrind' not in cmdline:
                 print()
