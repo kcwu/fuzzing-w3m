@@ -268,7 +268,7 @@ def reproduce(target, detector, case_path):
             ```
             ''').format(
                     result['filename'],
-                    subprocess.check_output(['xxd', result['filename']]).strip()).lstrip())
+                    subprocess.check_output(['xxd', result['filename']], encoding='utf8').strip()).lstrip())
 
             cmdline = subprocess.list2cmdline(result['cmd'])
             for k, v in result['env'].items():
