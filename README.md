@@ -2,6 +2,9 @@
 
  - some helper scripts and data for fuzzing w3m.
  - fuzzing result and test cases.
+ - fuzzing report:
+   * [report as 2016](reports/report-2016.html)
+   * [recent report](reports/report.html)
 
 Not all test cases are found by me. Please see individual link for their credit.
 
