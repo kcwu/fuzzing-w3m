@@ -133,3 +133,6 @@
   cve: CVE-2018-6197
 - case: tats-w3m-198
 - case: tats-w3m-199
+- case:
+    - tats-w3m-200
+    - tats-w3m-200.2
